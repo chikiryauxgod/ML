@@ -1,6 +1,0 @@
-path: /datasets/animals
-train: images/train
-val: images/val
-
-nc: 11
-names: ["animals", "cat", "chicken", "cow", "dog", "fox", "goat", "horse", "person", "racoon", "skunk"]

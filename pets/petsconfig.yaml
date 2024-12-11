@@ -1,0 +1,9 @@
+path: D:/GitHub/ML/pets/dataset/
+train: images/train
+val: images/test
+
+nc: 3  
+names:
+  0: cat
+  1: dog
+  2: rabbit
