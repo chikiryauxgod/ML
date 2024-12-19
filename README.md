@@ -9,6 +9,6 @@
 **Для этого использовал фото и видео, видео разделил покадрово, по ее результатам можно сказать, что полученная модель не совершенна**
 **Из-за присутствия в природе большого количества непохожих друг на друга пород собак, которые могли быть не представлены в датасете, некоторые собаки определяются некорректно, либо вообще не определяются**
 
-# dataset - https://huggingface.co/datasets/rokmr/pets
-# https://github.com/ankhafizov/CVAT2YOLO - конвертировал cvat to yolo через conda скрипт 
- 
+dataset - https://huggingface.co/datasets/rokmr/pets
+конвертировал cvat to yolo через conda скрипт - https://github.com/ankhafizov/CVAT2YOLO
+
