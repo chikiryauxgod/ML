@@ -49,8 +49,13 @@ for epoch in range(num_epochs):
 
 torch.save(model.state_dict(), "model.pt")
 
+X_predict = np.array([[1, 1, 1, 1, 1, 1, 1, 1, 1], # nothing (hope it will be b)
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0], # nothing 
+                      [0, 1, 1, 0, 1, 0, 0, 1, 1]], dtype=np.float32) # c 
+
+X_predict_tensor = torch.tensor(X_predict)
 
 with torch.no_grad():
-    y_pred = model(X_train_tensor)
+    y_pred = model(X_predict_tensor)
     _, predictions = torch.max(y_pred, 1) 
     print(f"Predictions: {predictions.numpy()}")  
