@@ -1,48 +1,46 @@
-import torch
 import numpy as np
 
-X_train = np.array([
-    [1, 0, 0, 1, 1, 1, 1, 0, 0],  # a
-    [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
-    [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
-    [1, 1, 0, 1, 1, 0, 1, 1, 1],  # a
-    [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
-    [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
-], dtype=np.float32)
+def hamming_distance(x, y): 
+    return np.sum(x != y) # количество позициий цифр, которые не совпадают
 
-# 0 = a, 1 = b, 2 = c
-y_train = np.array([0, 1, 2, 0, 1, 2], dtype=np.int64)
-
-templates = np.array([
-    [1, 0, 0, 1, 1, 1, 1, 0, 0],  # a
-    [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
-    [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
-], dtype=np.float32)
-
-
-def hamming_distance(x, y):
-    return np.sum(x != y)
-
-
-def predict(X):
-    distances = np.zeros((X.shape[0], templates.shape[0]))
-    for i in range(X.shape[0]):
+def predict(x):
+    distances = np.zeros((x.shape[0], templates.shape[0])) # 6 х 3 
+    for i in range(x.shape[0]):
         for j in range(templates.shape[0]):
-            distances[i, j] = hamming_distance(X[i], templates[j])
+            distances[i, j] = hamming_distance(x[i], templates[j])
     
     predictions = np.argmin(distances, axis=1)
     return predictions
 
 
-predictions = predict(X_train)
+if __name__ == "__main__":
+    
+    X_train = np.array([
+        [1, 0, 0, 1, 1, 1, 1, 0, 0],  # a
+        [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
+        [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
+        [1, 1, 0, 1, 1, 0, 1, 1, 1],  # a
+        [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
+        [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
+    ], dtype=np.float32)
 
-print(f"True labels: {y_train}")
-print(f"Predicted labels: {predictions}")
+    # 0 = a, 1 = b, 2 = c
+    y_train = np.array([0, 1, 2, 0, 1, 2], dtype=np.float32)
 
-X_predict = np.array([[1, 1, 1, 1, 1, 1, 1, 1, 1],  # nothing (hope it will be b)
-                      [0, 0, 0, 0, 0, 0, 0, 0, 0],  # nothing
-                      [0, 1, 1, 0, 1, 0, 0, 1, 1]], dtype=np.float32)  # c
+    templates = np.array([
+        [1, 0, 0, 1, 1, 1, 1, 0, 0],  # a
+        [1, 1, 1, 1, 0, 1, 1, 1, 1],  # b
+        [0, 1, 1, 0, 1, 0, 0, 1, 1],  # c
+    ], dtype=np.float32)
+    predictions = predict(X_train)
 
-predictions_new = predict(X_predict)
+    print(f"True labels: {y_train}")
+    print(f"Predicted labels: {predictions}")
 
-print(f"Predictions for new inputs: {predictions_new}")
+    X_predict = np.array([[1, 1, 1, 1, 1, 1, 1, 1, 1],  # nothing (hope it will be b)
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],  # nothing
+                        [0, 1, 1, 0, 1, 0, 0, 1, 1]], dtype=np.float32)  # c
+
+    predictions_new = predict(X_predict)
+
+    print(f"Predictions for new input data: {predictions_new}")
