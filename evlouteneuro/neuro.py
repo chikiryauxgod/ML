@@ -1,4 +1,5 @@
 # 14.04.2025 Semenov Lev
+# Calculate best accuracy for the quantity of neurons in the hidden layer for the number classification task 
 
 import random
 import torch
@@ -118,12 +119,6 @@ def mut_uniform(individual, indpb=0.2):
 
 
 def setup_evolution():
-    """
-    Configure the DEAP evolutionary algorithm.
-    
-    Returns:
-        Toolbox with registered operators and initial population.
-    """
     creator.create("FitnessMax", base.Fitness, weights=(1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMax)
     toolbox = base.Toolbox()
